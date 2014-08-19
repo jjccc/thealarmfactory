@@ -1,0 +1,7 @@
+restore_visibilities();
+$("#add-sample-button-container").addClass("hide");
+$("#new-sample-placeholder").html('<%= escape_javascript(render("form").html_safe) %>');
+$("#add-sample-form").removeClass("hide")
+$("#cancel-new-sample").on("click", function(){
+  hide_add_sample_form();
+});

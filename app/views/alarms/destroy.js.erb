@@ -1,0 +1,9 @@
+$.pnotify({
+  text: '<%= @message.html_safe %>',
+  type: '<%= @status == :ok ? "success" : "error" %>'
+}); 
+
+<% if @status == :ok %>
+  <%= render partial: "build_alarms_timeline", :locals => { :alarms => @alarms } %>
+<% end %>
+

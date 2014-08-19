@@ -1,0 +1,7 @@
+restore_visibilities();
+$("#edit-sample-placeholder-<%= @sample.id %>").html('<%= escape_javascript(render("form").html_safe) %>');
+$("#edit-sample-placeholder-<%= @sample.id %>").parents("tr").removeClass("hide");
+$("#edit-sample-placeholder-<%= @sample.id %>").parents("tr").prev("tr").addClass("hide");
+$("#cancel-add-sample-<%= @sample.id %>").on("click", function(){
+  restore_visibilities();
+});

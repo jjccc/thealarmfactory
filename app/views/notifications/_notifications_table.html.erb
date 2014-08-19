@@ -1,0 +1,39 @@
+<div class="row">
+  <% if alarm.has_notifications? %>
+    <div class="col-md-8 alarm-tab">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Fecha</th>
+            <th>Muestras</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% NotificationDecorator.decorate_collection(notifications).each_with_index do |n, i| %>
+            <tr class="notification-row">
+              <td><%= (10 * (@notifications_page - 1)) + i + 1 %></td>
+              <td><%= n.created_at %></td>
+              <td><%= n.samples_count %></td>
+              <td>
+                 <a id="view-sample-button-<%= i.to_s %>" href="#" class="btn btn-primary btn-xs" title="Gráfico"> 
+                   <span class="glyphicon glyphicon-zoom-in"></span>
+                 </a>
+                 <a id="download-sample-button-<%= i.to_s %>" href="<%= export_alarm_path(alarm, n.id) %>" class="btn btn-primary btn-xs" title="Descargar muestra">
+                   <span class="glyphicon glyphicon-download-alt"></span>
+                 </a>
+                 <input type="hidden" value="<%= n.id %>">
+              </td>           
+            </tr>            
+          <% end %>    
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div id="no-notifications-message" class="col-md-12 alarm-tab">  
+      <p class="tab-message-error bg-info">La condición de la alarma no se ha cumplido nunca.</p>
+    </div>
+  <% end %>
+</div>
+

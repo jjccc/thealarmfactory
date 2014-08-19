@@ -1,0 +1,7 @@
+$("#notifications-container").html('<%= escape_javascript(render(partial: "notifications_table", 
+                                                                 locals: { alarm: AlarmDecorator.decorate(@alarm), 
+                                                                           notifications: @notifications,
+                                                                           page: @notifications_page }).html_safe) %>');
+$("#notification-paginator").html('<%= escape_javascript(paginate(@notifications, :params => { :controller => "notifications", :action => "index", :alarm_id => @alarm.id }, :remote => true).to_s) %>');
+bind_notifications_buttons();
+

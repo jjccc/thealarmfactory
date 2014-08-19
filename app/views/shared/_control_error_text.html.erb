@@ -1,0 +1,3 @@
+<h5 class="text-danger <%= "hidden" unless errors.any? && errors.keys.any?{ |x| x == symbol } %>">
+  <%= errors[errors.keys.select{ |x| x == symbol }.first] * "<br>" unless errors.any? && errors.keys.any?{ |x| x == symbol } %>
+</h5>

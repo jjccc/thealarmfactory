@@ -1,0 +1,16 @@
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail">
+    <div class="caption text-center">
+      <h2><%= plan.name %></h2>
+      <h2 class="price"><%= "#{plan.price.to_i} €/mes" %></h2>
+      <hr />
+      <h4><%= plan.alarms_text %></h4>
+      <hr />
+      <h4><%= plan.samples_text %></h4>
+      <hr />
+      <h4><%= plan.support_text %></h4>
+      <hr>
+      <a href="#" class="btn btn-lg btn-block <%= plan.is_default? ? "btn-danger" : "btn-primary" %>" role="button">Contratar</a>
+    </div>
+  </div>
+</div>

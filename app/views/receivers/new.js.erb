@@ -1,0 +1,7 @@
+restore_visibilities();
+$("#add-receiver-button-container").addClass("hide");
+$("#new-receiver-placeholder").html('<%= escape_javascript(render("form").html_safe) %>');
+$("#add-receiver-form").removeClass("hide")
+$("#cancel-new-receiver").on("click", function(){
+  hide_add_receiver_form();
+});

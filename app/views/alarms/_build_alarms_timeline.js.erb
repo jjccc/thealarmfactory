@@ -1,0 +1,6 @@
+$("#alarms").html("");
+<% alarms.each do |d| %>
+  $("#alarms").append($(Mustache.to_html($('#alarm_template').html(), <%= AlarmDecorator.decorate(d).to_json.to_s.html_safe %>)));
+<% end %>
+$('#paginator').html('<%= escape_javascript(paginate(alarms, :params => { :controller => "alarms", :action => "index" }, :remote => true).to_s) %>');  
+bind_manage_form_controls();  

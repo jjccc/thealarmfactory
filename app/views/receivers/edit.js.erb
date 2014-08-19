@@ -1,0 +1,8 @@
+restore_visibilities();
+$("#edit-receiver-placeholder-<%= @receiver.id %>").html('<%= escape_javascript(render("form").html_safe) %>');
+$("#edit-receiver-placeholder-<%= @receiver.id %>").parents("tr").removeClass("hide");
+$("#edit-receiver-placeholder-<%= @receiver.id %>").parents("tr").prev("tr").addClass("hide");
+$("#cancel-add-receiver-<%= @receiver.id %>").on("click", function(){
+  restore_visibilities();
+});
+

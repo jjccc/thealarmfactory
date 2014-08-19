@@ -1,0 +1,21 @@
+es:
+  hello: "Hello world"
+  number:    
+    format:
+      delimiter: .
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+  time:
+    formats:
+      default: ! '%d/%m/%Y'
+      time: '%H:%M:%S'
+      complete: '%d/%m/%Y %H:%M:%S'
+  views:
+    pagination:
+      first: "&laquo; Primera"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "..."

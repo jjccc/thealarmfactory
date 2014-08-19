@@ -1,0 +1,175 @@
+grammar Condition
+ 
+  ####################################
+  ##            EXPRESSIONS         ##
+  #################################### 
+
+  rule comparison
+    space? additive space? comparison_operator space? additive <ComparisonExpression>
+  end
+  
+  rule additive
+    multitive space? additive_operator space? additive <AdditiveExpression>
+    /
+    multitive 
+  end
+  
+  rule multitive
+    primary space? multitive_operator space? multitive <MultitiveExpression>
+    /
+    primary 
+  end
+   
+  rule primary
+    constant 
+    / 
+    sample_operator
+    /  
+    "(" space? additive space? ")" <PrimaryExpression>
+  end
+     
+  ####################################
+  ##        OPERATORS SETS          ##
+  #################################### 
+  
+  rule constant
+    float / integer
+  end
+  
+  rule comparison_operator
+     equal_than / distinct / less_or_equal_than / greater_or_equal_than / greater_than / less_than
+  end
+  
+  rule sample_operator
+    average / size / max / min / first / last / ith / variance / stdev / mode / median / summation / multiplication
+  end
+  
+  rule additive_operator
+    plus / minus
+  end
+  
+  rule multitive_operator
+    per / between
+  end
+
+  ####################################
+  ##            LITERALS            ##
+  #################################### 
+  
+  rule integer
+    ('+' / '-')? [0-9]+ <Literal>
+  end
+  
+  rule float
+    ('+' / '-')? [0-9]+ (('.' [0-9]+) / ('e' [0-9]+)) <Literal>
+  end 
+  
+  ####################################
+  ##            OPERATORS           ##
+  #################################### 
+  
+  rule minus
+    "-" <ConditionOperator>
+  end
+  
+  rule plus
+    "+" <ConditionOperator>
+  end
+  
+  rule per
+    "*" <ConditionOperator>
+  end
+  
+  rule between
+    "/" <ConditionOperator>
+  end
+ 
+  rule less_than
+    "<" <ConditionOperator>
+  end
+  
+  rule greater_than
+    ">" <ConditionOperator> 
+  end
+  
+  rule equal_than
+    "=" <ConditionOperator>
+  end
+  
+  rule less_or_equal_than
+    "<=" <ConditionOperator>
+  end
+  
+  rule greater_or_equal_than
+    ">=" <ConditionOperator>
+  end
+  
+  rule distinct
+    "<>" <ConditionOperator>
+  end   
+  
+  rule size
+    "size" <SampleOperator>
+  end
+  
+  rule summation
+    "sum" <SampleOperator>
+  end
+  
+  rule multiplication
+    "mul" <SampleOperator>
+  end
+  
+  rule ith
+    "ith(" integer ")" <IthOperator>
+  end
+  
+  rule average
+    "avg" <SampleOperator>
+  end
+  
+  rule max
+    "max" <SampleOperator>
+  end
+  
+  rule min
+    "min" <SampleOperator>
+  end
+  
+  rule first
+    "first" <SampleOperator>
+  end
+  
+  rule last
+    "last" <SampleOperator>
+  end
+  
+  rule variance
+    "var" <SampleOperator>
+  end
+  
+  rule stdev
+    "stdev" <SampleOperator>
+  end
+  
+  rule mode
+    "mode" <SampleOperator>
+  end
+  
+  rule median
+    "median" <SampleOperator>
+  end
+  
+  rule open_parenthesis
+    "(" <ConditionOperator>
+  end
+  
+  rule close_parenthesis
+    ")" <ConditionOperator>
+  end
+    
+  rule space
+    [\s]+    
+  end
+    
+end

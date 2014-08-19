@@ -1,0 +1,36 @@
+$.pnotify({
+  text: '<%= @message.html_safe %>',
+  type: '<%= @status == :created ? "success" : "error" %>'
+});
+
+<% if @status == :created %>
+
+  <% if @sample.has_triggered_alarm %>
+    $.pnotify({
+      text: 'Se ha cumplido la condición de la alarma',
+      type: 'success'
+    });  
+  <% end %>
+  
+  <% unless @from_alarm_show %>        
+    $("#alarm-<%= @alarm.id %>").replaceWith($(Mustache.to_html($('#alarm_template').html(), <%= AlarmDecorator.decorate(Alarm.find(@alarm.id)).to_json.html_safe %>)));
+    bind_manage_form_controls();   
+  <% else %>
+    hide_add_sample_form();
+    $("#samples-container").html('<%= escape_javascript(render(partial: "samples_table", 
+                                                               locals: { alarm: AlarmDecorator.decorate(Alarm.find(@alarm)),
+                                                                         samples: @samples,
+                                                                         page: @samples_page }).html_safe) %>');
+    $("#sample-paginator").html('<%= escape_javascript(paginate(@samples, :params => { :controller => "samples", :action => "index", :alarm_id => @alarm.id }, :remote => true).to_s) %>');                                                                         
+    bind_samples_buttons();  
+    $("#tab-samples-link").html('<%= AlarmDecorator.decorate(@alarm).tab_samples_title %>')
+    <% if @sample.has_triggered_alarm %>
+      $("#notifications-container").html('<%= escape_javascript(render(partial: "notifications/notifications_table", 
+                                                                locals: { alarm: AlarmDecorator.decorate(@alarm), 
+                                                                          notifications: @notifications,
+                                                                          page: @notifications_page }).html_safe) %>');
+
+      $("#tab-notifications-link").html('<%= AlarmDecorator.decorate(@alarm).tab_notifications_title %>')
+    <% end %>  
+  <% end %>
+<% end %>

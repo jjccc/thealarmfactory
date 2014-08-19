@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <h1 class="title"><%= alarm.name %></h1>
+</div>
+<div class="col-md-12">
+  <p class="list-group-item-text text-muted">
+    Creada el <%= alarm.created_at %>
+  </p>
+</div>
+<div class="col-md-12 <%= "hide" if alarm.description.blank? %>">
+  <p class="list-group-item-text alarm-description">
+    <%= alarm.description %>
+  </p> 
+</div>

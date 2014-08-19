@@ -1,0 +1,28 @@
+<%= javascript_include_tag "alarms/import" %>
+
+<%= render "index_header" %>
+
+<% unless @alarms.blank? %>
+  <div id="alarms" class="index">
+    <% AlarmDecorator.decorate_collection(@alarms).each do |a| %>
+      <%= render "alarm", :mustache => a %>
+    <% end %> 
+  </div>
+  <div id="paginator">
+    <%= paginate @alarms, :remote => true %>
+  </div>       
+<% else %>
+  <div class="alert alert-danger">
+    No se han encontrado alarmas. Pruebe con otra búsqueda.
+  </div>   
+<% end %> 
+
+<%= render :partial => "/imports/dialog", :locals => { :alarm => nil } %>
+
+<script type="text/html" id="alarm_template">
+  <%= render "alarm" %>
+</script>
+
+<% content_for :script do %>
+  <%= javascript_include_tag "alarms/index" %>
+<% end %>

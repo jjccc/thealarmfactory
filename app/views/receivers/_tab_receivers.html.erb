@@ -1,0 +1,20 @@
+<div id="receivers-container">
+  <%= render partial: "receivers/receivers_table", locals: { alarm: alarm, receivers: receivers, page: page } %>
+</div>
+
+<div id="receiver-paginator">
+  <%= paginate receivers, :params => { :controller => "receivers", :action => "index", :alarm_id => alarm.id }, :remote => true %>
+</div>
+
+<div id="add-receiver-form" class="row add-container hide">
+  <div id="add-receiver-container" class="col-md-8">   
+    <div id="new-receiver-placeholder">
+    </div>
+  </div>
+</div>
+
+<div id="add-receiver-button-container" class="row add-container">
+  <div class="col-md-3">    
+    <a id="add-receiver-button" href="<%= new_alarm_receiver_path(alarm) %>" class="btn btn-primary btn-block" data-remote="true">Añadir destinatario</a>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div id="edit-alarm-placeholder" class="col-md-12 hide">
+</div>
+<div class="alarm-info col-md-12 well">
+  <div id="alarm-info-container">
+    <%= render "alarm_info", locals: {alarm: alarm} %>  
+  </div>
+
+
+  <div class="col-md-10 buttons-bar">    
+    <div class="btn-group">
+      <a href="<%= edit_alarm_path(alarm) %>" class="btn btn-primary btn-xs" data-remote="true">Editar</a>
+    </div> 
+    <!--           
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+        Compartir <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu text-left" role="menu">
+        <li><a href="#">Correo electrónico</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Twitter</a></li>
+      </ul>
+    </div> 
+    -->  
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#delete-sample-modal">Eliminar</button>
+    </div>          
+  </div>   
+  <div class="col-md-2 text-right buttons-bar">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary btn-xs">
+        <a href="<%= alarms_path %>">Volver al índice de alarmas</a>
+      </button>
+    </div> 
+  </div> 
+
+</div>
+

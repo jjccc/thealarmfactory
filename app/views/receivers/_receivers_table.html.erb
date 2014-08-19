@@ -1,0 +1,48 @@
+<div class="row">
+  <% if alarm.has_receivers? %>
+    <div class="col-md-8 alarm-tab">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Destinatario</th>
+            <th>Modo de envío</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ReceiverDecorator.decorate_collection(receivers).each_with_index do |r, i| %>
+            <tr class="receiver-row">
+              <td><%= (10 * (page - 1)) + i + 1 %></td>
+              <td><%= r.name %></td>
+              <td><%= r.network %></td>
+              <td>
+                 <a id="edit-receiver-button" href="<%= edit_alarm_receiver_path(alarm, r, { :page => page }) %>" title="Editar" class="btn btn-primary btn-xs" data-remote="true">
+                   <span class="glyphicon glyphicon-pencil"></span>
+                 </a>
+                 <button id="delete-receiver-<%= alarm.id %>" title="Eliminar" type="button" class="btn btn-primary btn-xs">
+                   <span class="glyphicon glyphicon-remove"></span>
+                 </a>
+              </td>           
+            </tr>
+            <tr class="hide edit-receiver-row">
+              <td colspan="4">  
+                <div id="edit-receiver-placeholder-<%= r.id %>">
+                </div>            
+              </td>
+            </tr>
+            <tr class="hide delete-receiver-message">
+              <td colspan="4">
+                <div class="alert alert-danger">
+                  ¿Realmente quieres eliminar a <b><%= r.name %></b> como destinatario?
+                  <button id="cancel-delete-receiver-{{id}}" type="button" class="btn btn-primary">No</button>
+                  <a href="<%= alarm_receiver_path(alarm, r, { :page => page })%>" class="btn btn-warning" data-remote="true" data-method="delete">Sí</a>
+                </div>
+              </td>              
+            </tr>
+          <% end %>    
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

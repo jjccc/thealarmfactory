@@ -1,0 +1,6 @@
+$("#edit-alarm-placeholder").html('<%= escape_javascript(render("edit").html_safe) %>').removeClass("hide");
+$(".alarm-info").addClass("hide");
+$("#cancel-edit-alarm").on("click", function(){
+  $("#edit-alarm-placeholder").html('').addClass("hide");
+  $(".alarm-info").removeClass("hide"); 
+});
