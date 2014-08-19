@@ -1,0 +1,21 @@
+$.pnotify({
+  text: '<%= @message.html_safe %>',
+  type: '<%= @status == :created ? "success" : "error" %>'
+});
+
+<% if @status == :created %>  
+  <% unless @from_alarm_show %>        
+    $("#alarm-<%= @alarm.id %>").replaceWith($(Mustache.to_html($('#alarm_template').html(), <%= AlarmDecorator.decorate(Alarm.find(@alarm.id)).to_json.html_safe %>)));
+    bind_manage_form_controls();   
+  <% else %>
+    hide_add_receiver_form();
+    $("#receivers-container").html('<%= escape_javascript(render(partial: "receivers_table", 
+                                                                 locals: { alarm: AlarmDecorator.decorate(@alarm), 
+                                                                           receivers: @receivers,
+                                                                           page: @receivers_page }).html_safe) %>');
+    $("#receiver-paginator").html('<%= escape_javascript(paginate(@receivers, :params => { :controller => "receivers", :action => "index", :alarm_id => @alarm.id }, :remote => true).to_s) %>');                                                                           
+    bind_receivers_buttons();    
+    $("#no-receivers-main-message").addClass("hide"); 
+    $("#tab-receivers-link").html('<%= AlarmDecorator.decorate(@alarm).tab_receivers_title %>')   
+  <% end %>
+<% end %>

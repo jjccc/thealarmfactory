@@ -1,0 +1,57 @@
+<div class="row">
+  <%= render partial: "show_header", locals: { alarm: alarm } %>
+  
+  <div class="alarm-info col-md-12 well">
+    <div id="no-receivers-main-message" class="col-md-12 advise <%= "hide" if alarm.has_receivers %>">
+      <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Advertencia</strong>
+         No has definido ningún destinatario de la alarma, así que no se enviará ninguna notificación cuando se cumpla la condición.<br>
+        <a id="add-receiver-link" href="#">Añade el usuario de Twitter o el correo electrónico</a> de aquellas personas que quieres que reciban las notificaciones.
+      </div>                
+    </div>
+    
+    <% if @alarm.condition.blank? %>
+      <div class="col-md-12 advise">
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>Advertencia</strong>
+           La alarma no tiene condición de cumplimiento. 
+           <a id="add-condition-link" href="#">Define la condición</a> que se debe cumplir para que se envíen notificaciones a los destinatarios.
+        </div>                
+      </div>
+    <% end %>
+    
+    <div id="alarm-tabs" class="col-md-12">
+      <ul id="alarm-tab-ul" class="nav nav-tabs">
+        <li class="active"><a id="tab-notifications-link" href="#thrown" data-toggle="tab">Notificaciones de alarma (<%= alarm.notifications_count %>)</a></li>
+        <li><a href="#condition" data-toggle="tab">Condición de la alarma</a></li>
+        <li><a id="tab-samples-link" href="#sample" data-toggle="tab"><%= alarm.tab_samples_title %></a></li>
+        <li><a id="tab-receivers-link" href="#receivers" data-toggle="tab"><%= alarm.tab_receivers_title %></a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane active" id="thrown">
+          <%= render partial: "notifications/tab_notifications", locals: { alarm: alarm, notifications: @notifications, page: @notifications_page } %>
+        </div>
+        <div class="tab-pane" id="condition">
+          <%= render partial: "operations/tab_operations", locals: { alarm: @alarm, operators: @operators, operator_types: @operator_types } %>
+        </div>
+        <div class="tab-pane" id="sample">
+          <%= render partial: "samples/tab_samples", locals: { alarm: alarm, samples: @samples, page: @samples_page } %>
+        </div>
+        <div class="tab-pane" id="receivers">
+          <%= render partial: "receivers/tab_receivers", locals: { alarm: alarm, receivers: @receivers, page: @receivers_page } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% content_for :script do %>
+  <%= javascript_include_tag "alarms/show" %>
+<% end %>
+
+
+

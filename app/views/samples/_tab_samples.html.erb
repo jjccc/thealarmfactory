@@ -1,0 +1,28 @@
+<div id="samples-container">
+  <%= render partial: "samples/samples_table", locals: { alarm: alarm, samples: samples, page: page } %>
+</div>
+
+<div id="sample-paginator">
+  <%= paginate samples, :params => { :controller => "samples", :action => "index", :alarm_id => alarm.id }, :remote => true %>
+</div>
+
+<div id="add-sample-form" class="row add-container hide">
+  <div id="add-sample-container" class="col-md-8">   
+    <div id="new-sample-placeholder">
+    </div>
+  </div>
+</div>
+
+<div id="add-sample-button-container" class="row add-container">
+  <div class="col-md-3">    
+    <a id="add-sample-button" href="<%= new_alarm_sample_path(alarm) %>" class="btn btn-primary btn-block" data-remote="true">Añadir muestra</a>
+  </div>
+  <div class="col-md-3">
+    <a id="import-sample-button" href="#" class="btn btn-primary btn-block">Importar</a>
+  </div>
+  <div class="col-md-3">
+    <a id="export-sample-button" href="<%= export_alarm_path(alarm) %>" class="btn btn-primary btn-block">Exportar</a>
+  </div>
+</div>
+
+<%= render :partial => "/imports/dialog", :locals => { :alarm => @alarm } %>

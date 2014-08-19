@@ -1,0 +1,108 @@
+<div id="alarm-{{id}}" class="panel panel-default alarm-timeline">  
+  <a class="alarm-timeline" href="{{show_url}}">
+    <div class="row panel-body">
+      <div class="col-md-9">
+        <h2 class="list-group-item-heading">          
+          {{{name}}} 
+        </h2>        
+      </div>
+      <div class="col-md-3">
+        <h2 class="list-group-item-heading pull-right">
+          {{samples_count}} {{samples_count_text}}
+        </h2>        
+      </div>
+      {{#has_notifications}}
+        <div class="col-md-12">
+          <div class="alert alert-danger alarm-message">
+            <div class="col-md-1">
+              <h2 class="text-danger bell">   
+                <span class="glyphicon glyphicon-bell"></span>
+              </h2>
+            </div>
+            <div> 
+              Se ha cumplido la condición de la alarma el {{last_notification_created_at_date}} a las {{last_notification_created_at_time}}
+            </div>
+          </div>        
+        </div>
+      {{/has_notifications}} 
+      <div class="col-md-12">
+        <p class="list-group-item-text text-muted">
+          Creada el {{created_at}}
+        </p>
+      </div>
+      <div class="col-md-12">
+        <p class="list-group-item-text text-muted">
+          {{#has_receivers}}
+            Se envía a {{first_receiver}}{{#has_more_receivers}} y {{more_receivers_count}} más{{/has_more_receivers}}
+          {{/has_receivers}}
+          {{^has_receivers}}
+            La alarma no tiene destinatarios
+          {{/has_receivers}}
+        </p>
+      </div>           
+      <div class="col-md-12">        
+        <p class="list-group-item-text alarm-description">
+          {{{description}}}
+        </p>
+      </div>       
+    </div>
+  </a>  
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-md-11">
+        <form accept-charset="UTF-8" action="{{add_sample_url}}" id="add-sample-{{id}}" class="form-inline hide new_sample" role="form" method="post" data-remote="true">
+          <div class="form-group">
+            <input id="sample_value" name="sample[value]" type="text" class="form-control" placeholder="Nueva muestra...">
+            <button id="save-add-sample-{{id}}" type="submit" class="btn btn-primary">Guardar</button>
+            <button id="cancel-add-sample-{{id}}" type="button" class="btn btn-warning">Cancelar</button>
+          </div>
+        </form>
+        <form accept-charset="UTF-8" action="{{add_receiver_url}}" id="add-receiver-{{id}}" class="form-inline hide new_receiver" role="form" method="post" data-remote="true">
+          <div class="form-group col-md-5 receiver">            
+            <input id="receiver_name" name="receiver[name]" type="text" class="form-control receiver" placeholder="Nuevo destinatario...">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="form-control btn btn-primary">Guardar</button>
+          </div>
+          <div class="form-group">
+            <button id="cancel-add-receiver-{{id}}" type="button" class="form-control btn btn-warning">Cancelar</button>
+          </div>
+        </form>
+        <form accept-charset="UTF-8" action="{{destroy_url}}" id="remove-alarm-{{id}}" class="form-inline hide" role="form" method="delete" data-remote="true">
+          <div class="form-group">
+            <div class="alert alert-danger alarm-message">
+              Al eliminar la alarma se perderán también todas sus muestras. ¿Estás seguro de que quieres continuar con la eliminación?          
+              <button id="cancel-remove-alarm-{{id}}" type="button" class="btn btn-primary">No</button>
+              <button type="submit" class="btn btn-warning">Sí</button>
+            </div>
+          </div>
+        </form>        
+      </div>
+      <div class="col-md-1">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" title="Opciones">
+            <span class="glyphicon glyphicon-cog"></span>
+          </button>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <li><a data-toggle="dropdown" id="show-add-sample-{{id}}" data-target="#" href="#">Añadir muestra</a></li>              
+            <li><a data-toggle="dropdown" id="show-add-receiver-{{id}}" data-target="#" href="#">Añadir destinatario</a></li>
+            <li class="divider"></li>
+            <li><a data-toggle="dropdown" id="import-sample-{{id}}" href="#">Importar datos</a></li>
+            <li><a href="{{export_url}}">Exportar datos</a></li>
+            <!--
+            <li class="divider"></li>
+            <li><a href="#">Enviar por correo electrónico</a></li>
+            <li><a href="#">Enviar a Twitter</a></li>
+            <li><a href="#">Enviar a Facebook</a></li>
+            -->
+            <li class="divider"></li>            
+            <li><a data-toggle="dropdown" id="show-remove-alarm-{{id}}" data-target="#" href="#">Eliminar</a></li>
+          </ul>          
+        </div>
+      </div>
+    </div>
+  </div> 
+  <input type="hidden" value="{{id}}">   
+</div>
+
+

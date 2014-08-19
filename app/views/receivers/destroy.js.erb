@@ -1,0 +1,18 @@
+$.pnotify({
+  text: '<%= @message.html_safe %>',
+  type: '<%= @status == :ok ? "success" : "error" %>'
+});
+
+<% if @status == :ok %>  
+  $("#receivers-container").html('<%= escape_javascript(render(partial: "receivers_table", 
+                                                               locals: { alarm: AlarmDecorator.decorate(@alarm), 
+                                                                         receivers: @receivers,
+                                                                         page: @receivers_page }).html_safe) %>');
+  $("#receiver-paginator").html('<%= escape_javascript(paginate(@receivers, :params => { :controller => "receivers", :action => "index", :alarm_id => @alarm.id }, :remote => true).to_s) %>');                                                                         
+  bind_receivers_buttons();   
+  $("#tab-receivers-link").html('<%= AlarmDecorator.decorate(@alarm).tab_receivers_title %>')
+  
+  <% unless @alarm.has_receivers? %>
+    $("#add-receiver-button").click();
+  <% end %> 
+<% end %>

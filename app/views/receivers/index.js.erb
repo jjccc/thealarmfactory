@@ -1,0 +1,8 @@
+restore_visibilities();
+$("#receivers-container").html('<%= escape_javascript(render(partial: "receivers_table", 
+                                                             locals: { alarm: AlarmDecorator.decorate(@alarm), 
+                                                                       receivers: @receivers,
+                                                                       page: @receivers_page }).html_safe) %>');
+$("#receiver-paginator").html('<%= escape_javascript(paginate(@receivers, :params => { :controller => "receivers", :action => "index", :alarm_id => @alarm.id }, :remote => true).to_s) %>');
+bind_receivers_buttons(); 
+

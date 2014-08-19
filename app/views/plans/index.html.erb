@@ -1,0 +1,28 @@
+<%= javascript_include_tag "plans/index" %>
+
+<div class="row text-center">
+  <div class="col-12">
+    <h1><b>Planes de precios.</b></h1>
+    <h3>15 días de prueba gratis en todos los planes, sin dar información de tu tarjeta de crédito.</h3>
+  </div>    
+</div>
+
+<div class="row">  
+  <%= render partial: "plan", collection: @plans %>    
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h3>Recuerda que:</h3>
+    <ul>
+      <li><h5>No hay compromiso de permanencia. Si quieres cancelar tu plan puedes hacerlo en cualquier momento.</h5></li>
+      <li><h5>Puedes cambiar de plan en cualquier momento, tanto para escoger un plan superior como para uno inferior.</h5></li>
+      <li><h5>Todas las gestiones de tu plan las puedes realizar desde el panel de control de tu cuenta o nos puedes enviar un correo electrónico a <a href="mailto:soporte@thealarmfactory.com">soporte@thealarmfactory.com</a> para que te lo solucionemos.</h5></li>
+      <li><h5>Si los planes estándar no te encajan puedes contactar con nosotros para encontrar una configuración que se adapte a tus necesidades.</h5></li>
+    </ul>
+    
+  </div>     
+</div>
+
+
+

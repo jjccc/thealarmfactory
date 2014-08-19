@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h4 class="modal-title"><%= @notification.alarm.name %></h4>
+  <h5>Condición cumplida el <%= NotificationDecorator.decorate(@notification).created_at %></h5>
+</div>
+<div class="modal-body" id="chart">
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+</div>
+
+<script>
+$(function () { 
+  Highcharts.setOptions({
+    lang: {
+      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+      shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      decimalPoint: ',',
+      thousandsSep: '.',
+      resetZoom: 'Sin zoom'
+    }
+  });
+  $('#chart').highcharts({
+    chart: {
+      type: 'line',
+      zoomType: 'x'
+    },    
+    title: {
+      text: null
+    },
+    xAxis: {
+      type: 'datetime',
+    },
+    yAxis: {
+      title: {
+        text: null
+      },
+      min: <%= @highchart.min %>,          
+    },
+    legend: {
+      enabled: false
+    },
+    tooltip: {
+      useHTML: true,
+      formatter: function() {
+        s = '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%d/%m/%Y %H:%M:%S', this.x) + '<br/><div class="tooltip-chart">' + this.y + '</div>';        
+        return s;                
+      }
+    },
+    credits: {
+      enabled: false
+    },
+    series: [{
+      name: 'Muestras',
+      data: [
+        <% @highchart.data.each do |d| %>
+          {
+            x: Date.UTC(<%= d.created_at.year %>, <%= d.created_at.month-1 %>, <%= d.created_at.day %>, <%= d.created_at.hour %>, <%= d.created_at.min %>, <%= d.created_at.sec %>),
+            y: <%= d.value %>
+          },          
+        <% end %>
+        ],
+      pointStart: Date.UTC(<%= @highchart.start_at.year %>, <%= @highchart.start_at.month-1 %>, <%= @highchart.start_at.day %>),
+      pointInterval: 24 * 1000 * 3600
+    }]
+  });
+});
+</script>

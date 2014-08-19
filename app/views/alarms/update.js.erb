@@ -1,0 +1,19 @@
+$.pnotify({
+  text: '<%= @message.html_safe %>',
+  type: '<%= @status == :ok ? "success" : "error" %>'
+});
+
+<% if @status == :ok %> 
+  $("#alarm-info-container").html('<%= escape_javascript(render(partial: "alarm_info", locals: { alarm: AlarmDecorator.decorate(@alarm) }).html_safe) %>');
+  $("#edit-alarm-placeholder").html('').addClass("hide");
+  $(".alarm-info").removeClass("hide");
+<% else %>
+  <% if !has_error_class(@alarm.errors, :name).blank? %>
+    $("#form-group-name").addClass("has-error");
+    $("#form-group-name").append('<%= escape_javascript(render(partial: "shared/control_error_text", locals: { errors: @alarm.errors, symbol: :name }).html_safe) %>');
+  <% end %>
+  <% if !has_error_class(@alarm.errors, :description).blank? %>
+    $("#form-group-description").addClass("has-error");
+    $("#form-group-description").append('<%= escape_javascript(render(partial: "shared/control_error_text", locals: { errors: @alarm.errors, symbol: :description }).html_safe) %>');
+  <% end %>
+<% end %>

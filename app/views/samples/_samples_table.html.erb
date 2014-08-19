@@ -1,0 +1,48 @@
+<div class="row">
+  <% if alarm.has_samples? %>
+    <div class="col-md-8 alarm-tab">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Fecha</th>
+            <th>Muestra</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% SampleDecorator.decorate_collection(samples).each_with_index do |s, i| %>
+            <tr class="sample-row">
+              <td><%= (10 * (page - 1)) + i + 1 %></td>
+              <td><%= s.created_at %></td>
+              <td><%= s.value %></td>
+              <td>
+                 <a id="edit-sample-button" href="<%= edit_alarm_sample_path(alarm, s, { :page => page }) %>" title="Editar" class="btn btn-primary btn-xs" data-remote="true">
+                   <span class="glyphicon glyphicon-pencil"></span>
+                 </a>
+                 <button id="delete-sample-<%= alarm.id %>" type="button" class="btn btn-primary btn-xs" title="Eliminar">
+                   <span class="glyphicon glyphicon-remove"></span>
+                 </a>
+              </td>           
+            </tr>
+            <tr class="hide edit-sample-row">
+              <td colspan="4">  
+                <div id="edit-sample-placeholder-<%= s.id %>">
+                </div>            
+              </td>
+            </tr>
+            <tr class="hide delete-sample-message">
+              <td colspan="4">
+                <div class="alert alert-danger">
+                  ¿Realmente quieres eliminar la muestra <b><%= s.value %></b> creada el <%= s.created_at %>
+                  <button id="cancel-delete-sample-{{id}}" type="button" class="btn btn-primary">No</button>
+                  <a href="<%= alarm_sample_path(alarm, s, { :page => page })%>" class="btn btn-warning" data-remote="true" data-method="delete">Sí</a>
+                </div>
+              </td>              
+            </tr>
+          <% end %>    
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

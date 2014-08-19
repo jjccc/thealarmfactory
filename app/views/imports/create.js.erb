@@ -1,0 +1,27 @@
+$.pnotify({
+  text: '<%= @message.html_safe %>',
+  type: '<%= @status == :created ? "success" : "error" %>'
+});
+
+<% if @status == :created %>
+  $("#import-dialog").modal('hide'); 
+  
+  <% if @import.from_index == true %>
+    $("#alarm-<%= @alarm.id %>").replaceWith($(Mustache.to_html($('#alarm_template').html(), <%= AlarmDecorator.decorate(Alarm.find(@alarm.id)).to_json.html_safe %>)));
+    bind_manage_form_controls();
+  <% else %>
+    $("#samples-container").html('<%= escape_javascript(render(partial: "samples/samples_table", 
+                                                               locals: { alarm: AlarmDecorator.decorate(Alarm.find(@alarm)),
+                                                                         samples: @samples,
+                                                                         page: @samples_page }).html_safe) %>');
+    $("#sample-paginator").html('<%= escape_javascript(paginate(@samples, :params => { :controller => "samples", :action => "index", :alarm_id => @alarm.id }, :remote => true).to_s) %>');                                                                         
+    bind_samples_buttons();  
+    $("#tab-samples-link").html('<%= AlarmDecorator.decorate(@alarm).tab_samples_title %>')
+  <% end %>
+<% else %>
+  <% if @import.is_file? %>
+    $("#file-selector").addClass("has-error");
+  <% else %>
+    $("#import_value").addClass("has-error");
+  <% end %>
+<% end %>

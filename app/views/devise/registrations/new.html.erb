@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="jumbotron col-lg-6 col-lg-offset-3">  
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :post }, :role => "form") do |f| %>
+    
+      <h2>Nueva cuenta</h2>
+      <div class="form-group <%= h has_error_class(resource.errors, :email) %>">
+        <%= f.email_field :email, :autofocus => true, :placeholder => "Correo electrónico", :class => "form-control" %>
+        <%= render :partial => "shared/control_error_text", :locals => { :errors => resource.errors, :symbol => :email } %>
+      </div>
+      <div class="form-group <%= h has_error_class(resource.errors, :password) %>">
+        <%= f.password_field :password, :placeholder => "Contraseña", :class => "form-control" %>
+        <%= render :partial => "shared/control_error_text", :locals => { :errors => resource.errors, :symbol => :password } %>
+      </div>
+      <div class="form-group <%= h has_error_class(resource.errors, :password_confirmation) %>">
+        <%= f.password_field :password_confirmation, :placeholder => "Repite tu contraseña", :class => "form-control" %>
+        <%= render :partial => "shared/control_error_text", :locals => { :errors => resource.errors, :symbol => :password_confirmation } %>
+      </div>
+      
+      <%= render "devise/shared/errors" %>
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Crear cuenta</button>
+    <% end %>
+    
+    <%= render "devise/shared/links" %>
+  </div>  
+</div>
+
+
+
+
+

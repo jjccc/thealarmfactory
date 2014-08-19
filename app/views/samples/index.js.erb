@@ -1,0 +1,7 @@
+restore_visibilities();
+$("#samples-container").html('<%= escape_javascript(render(partial: "samples_table", 
+                                                           locals: { alarm: AlarmDecorator.decorate(@alarm), 
+                                                                     samples: @samples,
+                                                                     page: @samples_page }).html_safe) %>');
+$("#sample-paginator").html('<%= escape_javascript(paginate(@samples, :params => { :controller => "samples", :action => "index", :alarm_id => @alarm.id }, :remote => true).to_s) %>');
+bind_samples_buttons(); 

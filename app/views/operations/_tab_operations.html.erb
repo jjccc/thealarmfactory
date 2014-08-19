@@ -1,0 +1,40 @@
+<div class="condition row">
+  <div class="col-md-3 alarm-tab">
+    <div class="panel-group" id="accordion">
+      <% operator_types.each_with_index do |ot, i| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i.to_s %>">
+                <%= ot.name %>
+              </a>
+            </h4>
+          </div>
+          <div id="collapse<%= i.to_s %>" class="panel-collapse collapse <%= "in" if i == 0 %>">
+            <div class="panel-body">
+              <div class="list-group">
+                <% operators[ot.id].each do |o| %>
+                  <a id="operator-<%= o.id %>" href="#" class="list-group-item"><%= o.symbol %></a>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= form_for alarm, :url => alarm_url(alarm), :html => { :role => "form", :class => "form-inline", :remote => true } do |f| %>
+    <div class="col-md-7 alarm-tab">       
+      <div class="form-group">
+        <%= f.text_area :condition, 
+                        :size => "80x10", 
+                        :max_length => 1000, 
+                        :class => "form-control input-lg", 
+                        :placeholder => "Escribe la fórmula de la condición o pincha en las operaciones de la izquierda..." %>
+      </div>
+      <button type="submit" class="form-group btn btn-primary">Guardar</button>
+    </div>   
+  <% end %>
+</div>
+
+
