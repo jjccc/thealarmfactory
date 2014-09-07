@@ -46,6 +46,6 @@ group :development do
   gem "rvm-capistrano", "~> 1.2.7"
 end
 
-
+gem "net-ssh", "2.7.0"
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

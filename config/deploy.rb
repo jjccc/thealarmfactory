@@ -2,18 +2,19 @@ require "bundler/capistrano"
 require "rvm/capistrano"
 
 set :application, "thealarmfactory"
+set :deploy_to, "/home/thealarmfactory"
 set :repository,  "git@github.com:jjccc/thealarmfactory.git"
 
 set :scm, :git
 default_run_options[:pty] = true
 set :user, "root"
-set :domain, "www.thealarmfactory.com"
+set :domain, "thealarmfactory.com"
 set :use_sudo, false
 
 require "rvm/capistrano"
-set :rvm_ruby_string, '2.1.2'
+set :rvm_ruby_string, '2.1.2p95'
 set :rvm_type, :user
-server 'thealarmfactory', :app, :web, :primary => true
+server '178.62.145.40', :app, :web, :primary => true
 set :remote_host, '178.62.145.40'
 
 # Setup Shared Folders that should be created inside the shared_path
