@@ -1,5 +1,5 @@
-require "bundler/capistrano"
 require "rvm/capistrano"
+require "bundler/capistrano"
 
 set :application, "thealarmfactory"
 set :deploy_to, "/home/thealarmfactory"
@@ -11,9 +11,8 @@ set :user, "root"
 set :domain, "thealarmfactory.com"
 set :use_sudo, false
 
-require "rvm/capistrano"
-set :rvm_ruby_string, '2.1.2p95'
-set :rvm_type, :user
+set :rvm_ruby_string, 'ruby-2-1-2'
+set :rvm_type, :system
 server '178.62.145.40', :app, :web, :primary => true
 set :remote_host, '178.62.145.40'
 
