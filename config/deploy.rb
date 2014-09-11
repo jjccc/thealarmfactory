@@ -21,8 +21,7 @@ directory_configuration = %w(db config system)
 
 # Setup Symlinks that should be created after each deployment
 symlink_configuration = [
-    %w(config/database.yml config/database.yml),
-    %w(system public/system)
+    %w(config/database.yml config/database.yml)
 ]
 
 # Application Specific Tasks
