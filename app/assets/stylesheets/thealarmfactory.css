@@ -1,0 +1,159 @@
+body {
+  padding-top: 78px;
+  background-color: rgb(196, 213, 229) !important;
+}
+
+hr {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}
+
+h1.title {
+  margin-top: 0px;  
+}
+
+p.alarm-description {
+  padding-top: 5px;
+}
+
+.alarm-timeline p.alarm-actions {
+  padding-top: 15px;
+}
+
+.alarm-timeline div.alarm-message {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+#alarm-tabs, .alarm-tab {
+  margin-top: 30px;
+}
+
+button > a, button > a:hover {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+p.tab-message-error {
+  padding: 15px;
+}
+
+.alarm-timeline:hover {
+  background-color: #F5F5F5;
+}
+
+a.alarm-timeline, a:hover.alarm-timeline {
+  color: #333333;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  text-align: left !important;
+}
+
+.index-header {
+  margin-bottom: 30px;
+}
+
+.alarm-message > .col-md-1 {
+  margin-top: -25px;
+  margin-left: -15px;
+  width: 65px !important;
+}
+
+.form-control.receiver, .form-control.sample {
+  width: 100% !important;
+}
+
+.form-group.receiver, .form-group.sample {
+  margin-left: -15px !important;
+}
+
+.advise {
+  margin-top: 20px;
+  margin-bottom: -15px; 
+}
+
+.advise a {
+  font-weight: bold;
+}
+
+.buttons-bar {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.condition .form-control {
+  margin-bottom: 10px;
+}
+
+.footer {
+  height: 40px;
+}
+
+.add-container {
+  margin-top: 15px;
+}
+
+button.login{
+  margin-top: 11px !important;
+}
+
+h2.price{
+  color: #FF0000;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.ma-navbar {
+  background-color: black !important;
+}
+
+.ma-navbar-text {
+  color: white !important;
+}
+
+.ma-navbar-text:hover {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+.alarm-info {
+  background-color: white !important;
+}
+
+.thumbnail.home {
+  padding: 50px;
+  min-height: 300px;
+  background-color: #EEEEEE;
+}
+
+.thumbnail.plan {
+  background-color: #AABBCC;
+}
+
+li.space {
+  width: 40px;
+}
+
+textarea.has-error {
+  border-color: #A94442;
+}
