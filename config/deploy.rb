@@ -277,17 +277,17 @@ DocumentRoot #{File.join(deploy_to, 'current', 'public')}
     system "cap deploy:db:sync_yaml"
   end
   
-  namespace :assets do
-   desc "Precompile assets locally and then rsync to deploy server"
-    task :precompile, :only => { :primary => true } do
-      run_locally "bundle exec rake assets:precompile"
-      servers = find_servers :roles => [:app], :except => { :no_release => true }
-      servers.each do |server|
-        run_locally "rsync -av ./public/#{assets_prefix}/ #{user}@#{server}:#{current_path}/public/#{assets_prefix}/"
-      end
-      run_locally "rm -rf public/#{assets_prefix}"
-    end
-  end
+  #namespace :assets do
+  # desc "Precompile assets locally and then rsync to deploy server"
+  #  task :precompile, :only => { :primary => true } do
+  #    run_locally "bundle exec rake assets:precompile"
+  #    servers = find_servers :roles => [:app], :except => { :no_release => true }
+  #    servers.each do |server|
+  #      run_locally "rsync -av ./public/#{assets_prefix}/ #{user}@#{server}:#{current_path}/public/#{assets_prefix}/"
+  #    end
+  #    run_locally "rm -rf public/#{assets_prefix}"
+  #  end
+  #end
   
   
 
