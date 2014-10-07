@@ -15,29 +15,29 @@
 development:
   adapter: postgresql
   encoding: UTF-8
-  database: thealarmfactory
+  database: *******
   host: localhost
   pool: 5
-  username: thealarmfactory
-  password: 1p4rp3ad
+  username: *******
+  password: *******
   port: 5432
 
 test:
   adapter: postgresql
   encoding: UTF-8
-  database: thealarmfactory_test
+  database: ********
   pool: 5
   host: localhost
-  username: thealarmfactory
-  password: 1p4rp3ad
+  username: ***********
+  password: ***********
   port: 5432
 
 production:
   adapter: postgresql
   encoding: UTF-8
-  database: thealarmfactory
+  database: *************
   pool: 5
   host: localhost
-  username: thealarmfactory
-  password: 1p4rp3ad
+  username: **************
+  password: **************
   port: 5432
