@@ -266,6 +266,11 @@ DocumentRoot #{File.join(deploy_to, 'current', 'public')}
     run "cd #{current_path}; #{ENV['command']}"
   end
 
+  desc "Set tmp/assets dir permissions."
+  task :tmp_permissions do
+    run "cd #{current_path}; chmod -R 0777 tmp/cache"
+  end
+  
   # Tasks that run after the (cap deploy:setup)
 
   desc "Sets up the shared path"
@@ -282,4 +287,4 @@ end
 # Callbacks
 after 'deploy:setup', 'deploy:setup_shared_path'
 after 'deploy:finalize_update', 'deploy:db:migrate', "deploy:assets:precompile"
-#after 'deploy:finalize_update', 'deploy:passenger_restart'
+after 'deploy:create_symlink', "deploy:tmp_permissions"
